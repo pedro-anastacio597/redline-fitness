@@ -2,10 +2,10 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   ArrowLeft,
-  Bell,
-  CalendarCheck,
+
+
   ChevronRight,
-  ClipboardList,
+
   Dumbbell,
   HeartPulse,
   History,
@@ -186,4 +186,3 @@ export function HeaderIcon({ children, label, onClick }: { children: ReactNode; 
   );
 }
 
-export { Bell, CalendarCheck, ClipboardList };
