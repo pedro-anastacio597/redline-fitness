@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { useAppState, currentUser } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import bg from "@/assets/gym-login-bg.jpg";
 import { Brand } from "@/components/AuthLayout";
@@ -18,6 +20,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Welcome() {
+  const s = useAppState();
+  const navigate = useNavigate();
+  const signedIn = s.ready && !!currentUser(s);
+  useEffect(() => {
+    if (signedIn) navigate({ to: "/inicio" });
+  }, [signedIn, navigate]);
   return (
     <div className="relative h-full overflow-hidden">
       <img src={bg} alt="Interior de academia" width={768} height={1344} className="absolute inset-0 h-full w-full object-cover" />

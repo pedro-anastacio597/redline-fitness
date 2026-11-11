@@ -11,10 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CadastroRouteImport } from './routes/cadastro'
+import { Route as HistoricoRouteImport } from './routes/historico'
 import { Route as InicioRouteImport } from './routes/inicio'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AvaliacoesIndexRouteImport } from './routes/avaliacoes.index'
 import { Route as AvaliacoesAvaliacaoIdRouteImport } from './routes/avaliacoes.$avaliacaoId'
+import { Route as PlanoIndexRouteImport } from './routes/plano.index'
+import { Route as PlanoDetalhesRouteImport } from './routes/plano.detalhes'
 import { Route as TreinosIndexRouteImport } from './routes/treinos.index'
 import { Route as TreinosTreinoIdRouteImport } from './routes/treinos.$treinoId'
 
@@ -26,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const CadastroRoute = CadastroRouteImport.update({
   id: '/cadastro',
   path: '/cadastro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoricoRoute = HistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InicioRoute = InicioRouteImport.update({
@@ -48,6 +56,16 @@ const AvaliacoesAvaliacaoIdRoute = AvaliacoesAvaliacaoIdRouteImport.update({
   path: '/avaliacoes/$avaliacaoId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanoIndexRoute = PlanoIndexRouteImport.update({
+  id: '/plano/',
+  path: '/plano/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanoDetalhesRoute = PlanoDetalhesRouteImport.update({
+  id: '/plano/detalhes',
+  path: '/plano/detalhes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TreinosIndexRoute = TreinosIndexRouteImport.update({
   id: '/treinos/',
   path: '/treinos/',
@@ -62,32 +80,41 @@ const TreinosTreinoIdRoute = TreinosTreinoIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cadastro': typeof CadastroRoute
+  '/historico': typeof HistoricoRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
   '/avaliacoes/$avaliacaoId': typeof AvaliacoesAvaliacaoIdRoute
+  '/plano/detalhes': typeof PlanoDetalhesRoute
   '/treinos/$treinoId': typeof TreinosTreinoIdRoute
   '/avaliacoes/': typeof AvaliacoesIndexRoute
+  '/plano/': typeof PlanoIndexRoute
   '/treinos/': typeof TreinosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cadastro': typeof CadastroRoute
+  '/historico': typeof HistoricoRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
   '/avaliacoes/$avaliacaoId': typeof AvaliacoesAvaliacaoIdRoute
+  '/plano/detalhes': typeof PlanoDetalhesRoute
   '/treinos/$treinoId': typeof TreinosTreinoIdRoute
   '/avaliacoes': typeof AvaliacoesIndexRoute
+  '/plano': typeof PlanoIndexRoute
   '/treinos': typeof TreinosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cadastro': typeof CadastroRoute
+  '/historico': typeof HistoricoRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
   '/avaliacoes/$avaliacaoId': typeof AvaliacoesAvaliacaoIdRoute
+  '/plano/detalhes': typeof PlanoDetalhesRoute
   '/treinos/$treinoId': typeof TreinosTreinoIdRoute
   '/avaliacoes/': typeof AvaliacoesIndexRoute
+  '/plano/': typeof PlanoIndexRoute
   '/treinos/': typeof TreinosIndexRoute
 }
 export interface FileRouteTypes {
@@ -95,42 +122,54 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cadastro'
+    | '/historico'
     | '/inicio'
     | '/login'
     | '/avaliacoes/$avaliacaoId'
+    | '/plano/detalhes'
     | '/treinos/$treinoId'
     | '/avaliacoes/'
+    | '/plano/'
     | '/treinos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/cadastro'
+    | '/historico'
     | '/inicio'
     | '/login'
     | '/avaliacoes/$avaliacaoId'
+    | '/plano/detalhes'
     | '/treinos/$treinoId'
     | '/avaliacoes'
+    | '/plano'
     | '/treinos'
   id:
     | '__root__'
     | '/'
     | '/cadastro'
+    | '/historico'
     | '/inicio'
     | '/login'
     | '/avaliacoes/$avaliacaoId'
+    | '/plano/detalhes'
     | '/treinos/$treinoId'
     | '/avaliacoes/'
+    | '/plano/'
     | '/treinos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CadastroRoute: typeof CadastroRoute
+  HistoricoRoute: typeof HistoricoRoute
   InicioRoute: typeof InicioRoute
   LoginRoute: typeof LoginRoute
   AvaliacoesAvaliacaoIdRoute: typeof AvaliacoesAvaliacaoIdRoute
+  PlanoDetalhesRoute: typeof PlanoDetalhesRoute
   TreinosTreinoIdRoute: typeof TreinosTreinoIdRoute
   AvaliacoesIndexRoute: typeof AvaliacoesIndexRoute
+  PlanoIndexRoute: typeof PlanoIndexRoute
   TreinosIndexRoute: typeof TreinosIndexRoute
 }
 
@@ -148,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/cadastro'
       fullPath: '/cadastro'
       preLoaderRoute: typeof CadastroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historico': {
+      id: '/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof HistoricoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inicio': {
@@ -178,6 +224,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AvaliacoesAvaliacaoIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plano/': {
+      id: '/plano/'
+      path: '/plano'
+      fullPath: '/plano/'
+      preLoaderRoute: typeof PlanoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plano/detalhes': {
+      id: '/plano/detalhes'
+      path: '/plano/detalhes'
+      fullPath: '/plano/detalhes'
+      preLoaderRoute: typeof PlanoDetalhesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/treinos/': {
       id: '/treinos/'
       path: '/treinos'
@@ -198,11 +258,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CadastroRoute: CadastroRoute,
+  HistoricoRoute: HistoricoRoute,
   InicioRoute: InicioRoute,
   LoginRoute: LoginRoute,
   AvaliacoesAvaliacaoIdRoute: AvaliacoesAvaliacaoIdRoute,
+  PlanoDetalhesRoute: PlanoDetalhesRoute,
   TreinosTreinoIdRoute: TreinosTreinoIdRoute,
   AvaliacoesIndexRoute: AvaliacoesIndexRoute,
+  PlanoIndexRoute: PlanoIndexRoute,
   TreinosIndexRoute: TreinosIndexRoute,
 }
 export const routeTree = rootRouteImport
