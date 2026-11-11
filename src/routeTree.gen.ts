@@ -14,6 +14,7 @@ import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as InicioRouteImport } from './routes/inicio'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as TreinosIndexRouteImport } from './routes/treinos.index'
+import { Route as TreinosTreinoIdRouteImport } from './routes/treinos.$treinoId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,12 +41,18 @@ const TreinosIndexRoute = TreinosIndexRouteImport.update({
   path: '/treinos/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TreinosTreinoIdRoute = TreinosTreinoIdRouteImport.update({
+  id: '/treinos/$treinoId',
+  path: '/treinos/$treinoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cadastro': typeof CadastroRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
+  '/treinos/$treinoId': typeof TreinosTreinoIdRoute
   '/treinos/': typeof TreinosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/cadastro': typeof CadastroRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
+  '/treinos/$treinoId': typeof TreinosTreinoIdRoute
   '/treinos': typeof TreinosIndexRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,29 @@ export interface FileRoutesById {
   '/cadastro': typeof CadastroRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
+  '/treinos/$treinoId': typeof TreinosTreinoIdRoute
   '/treinos/': typeof TreinosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cadastro' | '/inicio' | '/login' | '/treinos/'
+  fullPaths:
+    | '/'
+    | '/cadastro'
+    | '/inicio'
+    | '/login'
+    | '/treinos/$treinoId'
+    | '/treinos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cadastro' | '/inicio' | '/login' | '/treinos'
-  id: '__root__' | '/' | '/cadastro' | '/inicio' | '/login' | '/treinos/'
+  to:
+    '/' | '/cadastro' | '/inicio' | '/login' | '/treinos/$treinoId' | '/treinos'
+  id:
+    | '__root__'
+    | '/'
+    | '/cadastro'
+    | '/inicio'
+    | '/login'
+    | '/treinos/$treinoId'
+    | '/treinos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +99,7 @@ export interface RootRouteChildren {
   CadastroRoute: typeof CadastroRoute
   InicioRoute: typeof InicioRoute
   LoginRoute: typeof LoginRoute
+  TreinosTreinoIdRoute: typeof TreinosTreinoIdRoute
   TreinosIndexRoute: typeof TreinosIndexRoute
 }
 
@@ -116,6 +140,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TreinosIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/treinos/$treinoId': {
+      id: '/treinos/$treinoId'
+      path: '/treinos/$treinoId'
+      fullPath: '/treinos/$treinoId'
+      preLoaderRoute: typeof TreinosTreinoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -124,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   CadastroRoute: CadastroRoute,
   InicioRoute: InicioRoute,
   LoginRoute: LoginRoute,
+  TreinosTreinoIdRoute: TreinosTreinoIdRoute,
   TreinosIndexRoute: TreinosIndexRoute,
 }
 export const routeTree = rootRouteImport

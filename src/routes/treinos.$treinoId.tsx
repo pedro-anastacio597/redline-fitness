@@ -77,12 +77,10 @@ function WorkoutPage() {
   const progress = completed.length / total;
 
   const toggleSet = (e: Exercise, i: number) => {
-    setSetsDone((prev) => {
-      const arr = [...(prev[e.id] ?? Array(e.sets).fill(false))];
-      arr[i] = !arr[i];
-      if (arr[i] && e.restSec > 0 && i < e.sets - 1) setRestUntil(Date.now() + e.restSec * 1000);
-      return { ...prev, [e.id]: arr };
-    });
+    const arr = [...(setsDone[e.id] ?? Array(e.sets).fill(false))];
+    arr[i] = !arr[i];
+    setSetsDone({ ...setsDone, [e.id]: arr });
+    if (arr[i] && e.restSec > 0 && i < e.sets - 1) setRestUntil(Date.now() + e.restSec * 1000);
   };
 
   const completeExercise = (e: Exercise) => {
