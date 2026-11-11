@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Bell, Flame, Heart, MessageCircle, Moon, Play, Quote, Timer } from "lucide-react";
+import { Bell, Flame, Heart, Moon, Play, Quote, Timer } from "lucide-react";
 import { AppShell, HeaderIcon } from "@/components/AppShell";
 import { WeekStrip } from "@/components/WeekStrip";
 import { Button } from "@/components/ui/button";
@@ -131,12 +131,11 @@ function Home() {
                         <p className="mt-2 font-display text-[1.7rem] leading-tight tracking-wide">{p.quote}</p>
                         {p.body && <p className="mt-3 text-sm text-muted-foreground">{p.body}</p>}
                       </div>
-                      <footer className="flex items-center justify-between border-t border-border px-5 py-3 text-sm">
+                      <footer className="flex items-center border-t border-border px-5 py-3 text-sm">
                         <button onClick={() => actions.toggleLike(p.id)} className={cn("flex items-center gap-2 font-semibold", liked ? "text-primary" : "text-muted-foreground")} aria-pressed={liked}>
                           <Heart className={cn("h-5 w-5", liked && "fill-current")} />
                           {p.likes + (liked ? 1 : 0)}
                         </button>
-                        <span className="flex items-center gap-2 text-muted-foreground"><MessageCircle className="h-5 w-5" /> Comentar</span>
                       </footer>
                     </article>
                   );
