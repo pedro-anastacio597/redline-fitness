@@ -166,7 +166,7 @@ export function ConfirmModal({
 export function VideoModal({ open, onClose, src, title }: { open: boolean; onClose: () => void; src: string; title: string }) {
   return (
     <Modal open={open} onClose={onClose} className="bg-stage">
-      <video src={src} className="aspect-[9/12] w-full bg-stage object-cover" autoPlay loop muted playsInline controls />
+      <video src={src} className="aspect-video w-full bg-stage object-cover" autoPlay loop muted playsInline controls />
       <div className="p-4">
         <p className="text-xs font-semibold uppercase tracking-widest text-primary">Demonstração</p>
         <p className="font-display text-2xl tracking-wide">{title}</p>
