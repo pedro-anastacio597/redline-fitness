@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as InicioRouteImport } from './routes/inicio'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AvaliacoesIndexRouteImport } from './routes/avaliacoes.index'
+import { Route as AvaliacoesAvaliacaoIdRouteImport } from './routes/avaliacoes.$avaliacaoId'
 import { Route as TreinosIndexRouteImport } from './routes/treinos.index'
 import { Route as TreinosTreinoIdRouteImport } from './routes/treinos.$treinoId'
 
@@ -36,6 +38,16 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AvaliacoesIndexRoute = AvaliacoesIndexRouteImport.update({
+  id: '/avaliacoes/',
+  path: '/avaliacoes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvaliacoesAvaliacaoIdRoute = AvaliacoesAvaliacaoIdRouteImport.update({
+  id: '/avaliacoes/$avaliacaoId',
+  path: '/avaliacoes/$avaliacaoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TreinosIndexRoute = TreinosIndexRouteImport.update({
   id: '/treinos/',
   path: '/treinos/',
@@ -52,7 +64,9 @@ export interface FileRoutesByFullPath {
   '/cadastro': typeof CadastroRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
+  '/avaliacoes/$avaliacaoId': typeof AvaliacoesAvaliacaoIdRoute
   '/treinos/$treinoId': typeof TreinosTreinoIdRoute
+  '/avaliacoes/': typeof AvaliacoesIndexRoute
   '/treinos/': typeof TreinosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,7 +74,9 @@ export interface FileRoutesByTo {
   '/cadastro': typeof CadastroRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
+  '/avaliacoes/$avaliacaoId': typeof AvaliacoesAvaliacaoIdRoute
   '/treinos/$treinoId': typeof TreinosTreinoIdRoute
+  '/avaliacoes': typeof AvaliacoesIndexRoute
   '/treinos': typeof TreinosIndexRoute
 }
 export interface FileRoutesById {
@@ -69,7 +85,9 @@ export interface FileRoutesById {
   '/cadastro': typeof CadastroRoute
   '/inicio': typeof InicioRoute
   '/login': typeof LoginRoute
+  '/avaliacoes/$avaliacaoId': typeof AvaliacoesAvaliacaoIdRoute
   '/treinos/$treinoId': typeof TreinosTreinoIdRoute
+  '/avaliacoes/': typeof AvaliacoesIndexRoute
   '/treinos/': typeof TreinosIndexRoute
 }
 export interface FileRouteTypes {
@@ -79,18 +97,29 @@ export interface FileRouteTypes {
     | '/cadastro'
     | '/inicio'
     | '/login'
+    | '/avaliacoes/$avaliacaoId'
     | '/treinos/$treinoId'
+    | '/avaliacoes/'
     | '/treinos/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/cadastro' | '/inicio' | '/login' | '/treinos/$treinoId' | '/treinos'
+    | '/'
+    | '/cadastro'
+    | '/inicio'
+    | '/login'
+    | '/avaliacoes/$avaliacaoId'
+    | '/treinos/$treinoId'
+    | '/avaliacoes'
+    | '/treinos'
   id:
     | '__root__'
     | '/'
     | '/cadastro'
     | '/inicio'
     | '/login'
+    | '/avaliacoes/$avaliacaoId'
     | '/treinos/$treinoId'
+    | '/avaliacoes/'
     | '/treinos/'
   fileRoutesById: FileRoutesById
 }
@@ -99,7 +128,9 @@ export interface RootRouteChildren {
   CadastroRoute: typeof CadastroRoute
   InicioRoute: typeof InicioRoute
   LoginRoute: typeof LoginRoute
+  AvaliacoesAvaliacaoIdRoute: typeof AvaliacoesAvaliacaoIdRoute
   TreinosTreinoIdRoute: typeof TreinosTreinoIdRoute
+  AvaliacoesIndexRoute: typeof AvaliacoesIndexRoute
   TreinosIndexRoute: typeof TreinosIndexRoute
 }
 
@@ -133,6 +164,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/avaliacoes/': {
+      id: '/avaliacoes/'
+      path: '/avaliacoes'
+      fullPath: '/avaliacoes/'
+      preLoaderRoute: typeof AvaliacoesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/avaliacoes/$avaliacaoId': {
+      id: '/avaliacoes/$avaliacaoId'
+      path: '/avaliacoes/$avaliacaoId'
+      fullPath: '/avaliacoes/$avaliacaoId'
+      preLoaderRoute: typeof AvaliacoesAvaliacaoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/treinos/': {
       id: '/treinos/'
       path: '/treinos'
@@ -155,7 +200,9 @@ const rootRouteChildren: RootRouteChildren = {
   CadastroRoute: CadastroRoute,
   InicioRoute: InicioRoute,
   LoginRoute: LoginRoute,
+  AvaliacoesAvaliacaoIdRoute: AvaliacoesAvaliacaoIdRoute,
   TreinosTreinoIdRoute: TreinosTreinoIdRoute,
+  AvaliacoesIndexRoute: AvaliacoesIndexRoute,
   TreinosIndexRoute: TreinosIndexRoute,
 }
 export const routeTree = rootRouteImport
