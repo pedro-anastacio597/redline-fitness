@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Dumbbell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import bg from "@/assets/gym-login-bg.jpg";
+import { Brand } from "@/components/AuthLayout";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,17 +16,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Welcome,
 });
-
-export function Brand({ className = "" }: { className?: string }) {
-  return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-primary shadow-glow">
-        <Dumbbell className="h-5 w-5" />
-      </span>
-      <span className="font-display text-4xl tracking-[0.2em]">FORJA</span>
-    </div>
-  );
-}
 
 function Welcome() {
   return (
